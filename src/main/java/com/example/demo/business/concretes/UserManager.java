@@ -1,9 +1,8 @@
 package com.example.demo.business.concretes;
 
 import com.example.demo.business.abstracts.UserService;
-import com.example.demo.dataAccess.UserDao;
-import com.example.demo.model.User;
-import lombok.AllArgsConstructor;
+import com.example.demo.repositories.UserRepository;
+import com.example.demo.entities.User;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,27 +14,32 @@ import java.util.List;
 public class UserManager implements UserService {
 
     @Autowired
-    private UserDao _userDao;
+    private UserRepository userRepository;
 
-    public UserManager(UserDao _userDao) {
-        this._userDao = _userDao;
+    public UserManager(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public void add(User user) {
-        _userDao.save(user);
+        userRepository.save(user);
     }
 
     public void update(User user) {
-        _userDao.saveAndFlush(user);
+        userRepository.saveAndFlush(user);
     }
 
     public void delete(User user) {
-            _userDao.delete(user);
+            userRepository.delete(user);
     }
 
     @Override
     public List<User> getAll() {
-        return _userDao.findAll();
+        return userRepository.findAll();
+    }
+
+    public User getById(int id) {
+        var result = userRepository.findById(id).orElseThrow();
+        return result;
     }
 
 

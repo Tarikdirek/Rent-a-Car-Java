@@ -1,6 +1,7 @@
-package com.example.demo.model;
+package com.example.demo.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,9 +27,11 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Car> cars;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Rental> rentals;
 
 }

@@ -1,6 +1,6 @@
 package com.example.demo.business.abstracts;
 
-import com.example.demo.model.User;
+import com.example.demo.entities.User;
 
 import java.util.List;
 
@@ -10,4 +10,5 @@ public interface UserService {
     void update(User user);
     void delete(User user);
     List<User> getAll();
+    User getById(int id);
 }

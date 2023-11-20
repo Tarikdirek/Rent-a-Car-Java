@@ -1,12 +1,15 @@
 package com.example.demo.business.abstracts;
 
-import com.example.demo.model.Company;
+import com.example.demo.entities.Company;
+
+import java.util.List;
 
 public interface CompanyService {
 
     void add(Company company);
-    void update(Company company);
-    void delete(Company company);
+    void update(int id,Company company);
+    void delete(int id);
 
-    void getAll();
+    List<Company> getALl();
+    Company getById(int id);
 }

@@ -1,6 +1,6 @@
-package com.example.demo.model;
+package com.example.demo.entities;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,17 +12,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name="brands")
+public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "category_name")
-    private String categoryName;
+    @Column(name="name")
+    private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "brand")
+    @JsonIgnore
     private List<Car> cars;
 }
