@@ -2,7 +2,6 @@ package com.example.demo.business.concretes;
 
 import com.example.demo.business.abstracts.CategoryService;
 import com.example.demo.entities.Category;
-import com.example.demo.entities.Individual;
 import com.example.demo.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

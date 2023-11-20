@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 import com.example.demo.business.abstracts.CompanyService;
 import com.example.demo.business.abstracts.UserService;
 import com.example.demo.entities.Company;
-import com.example.demo.entities.Individual;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

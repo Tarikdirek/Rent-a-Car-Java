@@ -1,6 +1,5 @@
 package com.example.demo.business.abstracts;
 
-import com.example.demo.entities.Category;
 import com.example.demo.entities.Color;
 
 import java.util.List;

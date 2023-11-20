@@ -1,7 +1,6 @@
 package com.example.demo.business.concretes;
 
 import com.example.demo.business.abstracts.CompanyService;
-import com.example.demo.entities.Individual;
 import com.example.demo.repositories.CompanyRepository;
 import com.example.demo.entities.Company;
 import lombok.AllArgsConstructor;

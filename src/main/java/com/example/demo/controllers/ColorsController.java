@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.business.abstracts.ColorService;
-import com.example.demo.entities.Category;
 import com.example.demo.entities.Color;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

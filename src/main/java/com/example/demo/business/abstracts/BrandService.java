@@ -1,7 +1,6 @@
 package com.example.demo.business.abstracts;
 
 import com.example.demo.entities.Brand;
-import com.example.demo.entities.Category;
 
 import java.util.List;
 

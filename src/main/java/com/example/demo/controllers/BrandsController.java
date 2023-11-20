@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.business.abstracts.BrandService;
 import com.example.demo.entities.Brand;
-import com.example.demo.entities.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
