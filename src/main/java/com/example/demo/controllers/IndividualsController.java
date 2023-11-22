@@ -1,10 +1,11 @@
 package com.example.demo.controllers;
 
-import com.example.demo.business.abstracts.IndividualService;
-import com.example.demo.business.abstracts.UserService;
+import com.example.demo.services.abstracts.IndividualService;
 import com.example.demo.entities.Individual;
+import com.example.demo.services.dtos.individual.requests.AddIndividualRequest;
+import com.example.demo.services.dtos.individual.requests.DeleteIndividualRequest;
+import com.example.demo.services.dtos.individual.requests.UpdateIndividualRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 public class IndividualsController {
 
-    @Autowired
-    public final IndividualService individualService;
-    public final UserService userService;
 
+    public final IndividualService individualService;
 
 
     @GetMapping("/getAll")
@@ -36,23 +35,22 @@ public class IndividualsController {
 
 
     @PostMapping("/add")
-    public String add(@RequestBody Individual individual){
+    public String add(@RequestBody AddIndividualRequest request){
 
-       // individualService.add(individual);
-        userService.add(individual);
+        individualService.add(request);
 
         return "User added";
     }
 
-    @DeleteMapping("delete/{id}")
-    public String delete(@PathVariable int id){
-        individualService.delete(id);
+    @DeleteMapping("/delete")
+    public String delete(@RequestBody DeleteIndividualRequest request){
+        individualService.delete(request);
         return "User deleted";
     }
 
-    @PutMapping("update/{id}")
-    public String update(@PathVariable int id,@RequestBody Individual individual){
-        individualService.update(id,individual);
+    @PutMapping("/update")
+    public String update(@RequestBody UpdateIndividualRequest request){
+        individualService.update(request);
         return "User updated";
     }
 

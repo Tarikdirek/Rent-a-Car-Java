@@ -1,4 +1,4 @@
-package com.example.demo.business.abstracts;
+package com.example.demo.services.abstracts;
 
 import com.example.demo.entities.User;
 

@@ -1,10 +1,11 @@
 package com.example.demo.controllers;
 
-import com.example.demo.business.abstracts.CompanyService;
-import com.example.demo.business.abstracts.UserService;
+import com.example.demo.services.abstracts.CompanyService;
 import com.example.demo.entities.Company;
+import com.example.demo.services.dtos.company.requests.AddCompanyRequest;
+import com.example.demo.services.dtos.company.requests.DeleteCompanyRequest;
+import com.example.demo.services.dtos.company.requests.UpdateCompanyRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,9 +15,8 @@ import java.util.List;
 @RequestMapping("/api/companies")
 public class CompaniesController {
 
-    @Autowired
+
     public final CompanyService companyService;
-    public final UserService userService;
 
     @GetMapping("getAll")
     public List<Company> getALl() {
@@ -31,23 +31,21 @@ public class CompaniesController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestBody Company company){
+    public String add(@RequestBody AddCompanyRequest request){
 
-        // individualService.add(individual);
-        userService.add(company);
-
+        companyService.add(request);
         return "Company added";
     }
 
-    @DeleteMapping("delete/{id}")
-    public String delete(@PathVariable int id){
-        companyService.delete(id);
+    @DeleteMapping("/delete")
+    public String delete(@RequestBody DeleteCompanyRequest request){
+        companyService.delete(request);
         return "Company deleted";
     }
 
-    @PutMapping("update/{id}")
-    public String update(@PathVariable int id,@RequestBody Company company){
-        companyService.update(id,company);
+    @PutMapping("/update")
+    public String update(@RequestBody UpdateCompanyRequest request){
+        companyService.update(request);
         return "Company updated";
     }
 }

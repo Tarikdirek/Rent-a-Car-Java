@@ -1,9 +1,11 @@
 package com.example.demo.controllers;
 
-import com.example.demo.business.abstracts.BrandService;
+import com.example.demo.services.abstracts.BrandService;
 import com.example.demo.entities.Brand;
+import com.example.demo.services.dtos.brand.requests.AddBrandRequest;
+import com.example.demo.services.dtos.brand.requests.DeleteBrandRequest;
+import com.example.demo.services.dtos.brand.requests.UpdateBranRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/brands")
 public class BrandsController {
 
-    @Autowired
+
     public final BrandService brandService;
 
     @GetMapping("/getAll")
@@ -30,23 +32,20 @@ public class BrandsController {
 
 
     @PostMapping("/add")
-    public String add(@RequestBody Brand category){
-
-        // individualService.add(individual);
-        brandService.add(category);
-
+    public String add(@RequestBody AddBrandRequest request){
+        brandService.add(request);
         return "Brand added";
     }
 
-    @DeleteMapping("delete/{id}")
-    public String delete(@PathVariable int id){
-        brandService.delete(id);
+    @DeleteMapping("/delete")
+    public String delete(@RequestBody DeleteBrandRequest request){
+        brandService.delete(request);
         return "Brand deleted";
     }
 
-    @PutMapping("update")
-    public String update(@RequestBody Brand brand){
-        brandService.update(brand);
+    @PutMapping("/update")
+    public String update(@RequestBody UpdateBranRequest request){
+        brandService.update(request);
         return "Brand updated";
     }
 }

@@ -1,10 +1,9 @@
-package com.example.demo.business.concretes;
+package com.example.demo.services.concretes;
 
-import com.example.demo.business.abstracts.UserService;
+import com.example.demo.services.abstracts.UserService;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.entities.User;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 @Service
 public class UserManager implements UserService {
 
-    @Autowired
+
     private UserRepository userRepository;
 
     public UserManager(UserRepository userRepository) {

@@ -1,9 +1,11 @@
 package com.example.demo.controllers;
 
-import com.example.demo.business.abstracts.ColorService;
+import com.example.demo.services.abstracts.ColorService;
 import com.example.demo.entities.Color;
+import com.example.demo.services.dtos.color.requests.AddColorRequest;
+import com.example.demo.services.dtos.color.requests.DeleteColorRequest;
+import com.example.demo.services.dtos.color.requests.UpdateColorRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/colors")
 public class ColorsController {
 
-    @Autowired
+
     public ColorService colorService;
 
     @GetMapping("/getAll")
@@ -22,7 +24,7 @@ public class ColorsController {
         return result;
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("/getById")
     public Color getById(@PathVariable int id) {
         var result =colorService.getById(id);
         return result;
@@ -30,23 +32,22 @@ public class ColorsController {
 
 
     @PostMapping("/add")
-    public String add(@RequestBody Color color){
+    public String add(@RequestBody AddColorRequest request){
 
-        // individualService.add(individual);
-        colorService.add(color);
+        colorService.add(request);
 
         return "Color added";
     }
 
-    @DeleteMapping("delete/{id}")
-    public String delete(@PathVariable int id){
-        colorService.delete(id);
+    @DeleteMapping("/delete")
+    public String delete(@RequestBody DeleteColorRequest request){
+        colorService.delete(request);
         return "Color deleted";
     }
 
-    @PutMapping("update")
-    public String update(@RequestBody Color color){
-        colorService.update(color);
+    @PutMapping("/update")
+    public String update(@RequestBody UpdateColorRequest request){
+        colorService.update(request);
         return "Color updated";
     }
 
