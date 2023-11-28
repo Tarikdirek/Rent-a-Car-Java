@@ -6,6 +6,7 @@ import com.example.demo.repositories.BrandRepository;
 import com.example.demo.services.dtos.brand.requests.AddBrandRequest;
 import com.example.demo.services.dtos.brand.requests.DeleteBrandRequest;
 import com.example.demo.services.dtos.brand.requests.UpdateBranRequest;
+import com.example.demo.services.dtos.brand.responses.GetListBrandResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,21 @@ public class BrandManager implements BrandService {
         Brand brandToDelete = brandRepository.findById(request.getId()).orElseThrow();
         brandRepository.delete(brandToDelete);
     }
+
+    public List<Brand> getBrandByName(String name) {
+
+        return brandRepository.findByNameStartingWith(name);
+    }
+
+    public List<GetListBrandResponse> getBrandName(String name) {
+        return brandRepository.findByName(name);
+    }
+
+    public List<GetListBrandResponse> getBrandByNameLength(int nameLength) {
+
+        return brandRepository.findByNameLength(nameLength);
+    }
+
 
     public List<Brand> getALl() {
         var result = brandRepository.findAll();

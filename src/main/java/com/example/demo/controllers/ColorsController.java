@@ -5,6 +5,7 @@ import com.example.demo.entities.Color;
 import com.example.demo.services.dtos.color.requests.AddColorRequest;
 import com.example.demo.services.dtos.color.requests.DeleteColorRequest;
 import com.example.demo.services.dtos.color.requests.UpdateColorRequest;
+import com.example.demo.services.dtos.color.responses.GetListColorResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,15 @@ public class ColorsController {
     public Color getById(@PathVariable int id) {
         var result =colorService.getById(id);
         return result;
+    }
+
+    @GetMapping("/getByColorName")
+    public Color findColorByName(String name) {
+        return colorService.findColorByName(name);
+    }
+    @GetMapping("/getColorsByOrder")
+    public List<GetListColorResponse> getTop3Color() {
+        return colorService.getColorByOrder();
     }
 
 

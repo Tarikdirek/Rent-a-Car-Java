@@ -6,6 +6,7 @@ import com.example.demo.repositories.CategoryRepository;
 import com.example.demo.services.dtos.category.requests.AddCategoryRequest;
 import com.example.demo.services.dtos.category.requests.DeleteCategoryRequest;
 import com.example.demo.services.dtos.category.requests.UpdateCategoryRequest;
+import com.example.demo.services.dtos.category.responses.GetListCategoryResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,14 @@ public class CategoryManager implements CategoryService {
     public void delete(DeleteCategoryRequest request) {
         Category categoryToDelete = categoryRepository.findById(request.getId()).orElseThrow();
         categoryRepository.delete(categoryToDelete);
+    }
+
+    public List<GetListCategoryResponse> getAllByDtos(){
+        return categoryRepository.findAllByDtos();
+    }
+
+    public List<GetListCategoryResponse> getByFirstCharacter(char character) {
+        return categoryRepository.findByFirstCharacter(character);
     }
 
     public List<Category> getALl() {

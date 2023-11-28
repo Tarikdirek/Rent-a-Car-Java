@@ -6,6 +6,7 @@ import com.example.demo.entities.Individual;
 import com.example.demo.services.dtos.individual.requests.AddIndividualRequest;
 import com.example.demo.services.dtos.individual.requests.DeleteIndividualRequest;
 import com.example.demo.services.dtos.individual.requests.UpdateIndividualRequest;
+import com.example.demo.services.dtos.individual.responses.GetListIndividualResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +52,14 @@ public class IndividualManager implements IndividualService {
             throw new RuntimeException();
 
         individualRepository.delete(individualToDelete);
+    }
+
+    public List<GetListIndividualResponse> getIndividualByBirthDate(int birthYear) {
+        return individualRepository.getIndividualByBirthDate(birthYear);
+    }
+
+    public List<GetListIndividualResponse> getIndividualByFirstNameDesc() {
+        return individualRepository.getIndividualByFirstNameDesc();
     }
 
     public List<Individual> getALl() {

@@ -6,6 +6,7 @@ import com.example.demo.repositories.ColorRepository;
 import com.example.demo.services.dtos.color.requests.AddColorRequest;
 import com.example.demo.services.dtos.color.requests.DeleteColorRequest;
 import com.example.demo.services.dtos.color.requests.UpdateColorRequest;
+import com.example.demo.services.dtos.color.responses.GetListColorResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,14 @@ public class ColorManager implements ColorService {
     public void delete(DeleteColorRequest request) {
         Color colorToUpdate = colorRepository.findById(request.getId()).orElseThrow();
         colorRepository.delete(colorToUpdate);
+    }
+
+    public Color findColorByName(String name) {
+        return colorRepository.findColorByName(name);
+    }
+
+    public List<GetListColorResponse> getColorByOrder() {
+        return colorRepository.getColorByOrder();
     }
 
     public List<Color> getALl() {

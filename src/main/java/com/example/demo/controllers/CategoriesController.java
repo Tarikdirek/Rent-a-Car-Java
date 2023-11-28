@@ -5,6 +5,7 @@ import com.example.demo.entities.Category;
 import com.example.demo.services.dtos.category.requests.AddCategoryRequest;
 import com.example.demo.services.dtos.category.requests.DeleteCategoryRequest;
 import com.example.demo.services.dtos.category.requests.UpdateCategoryRequest;
+import com.example.demo.services.dtos.category.responses.GetListCategoryResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,15 @@ public class CategoriesController {
         return result;
     }
 
+    @GetMapping("/getAllByDtos")
+    public List<GetListCategoryResponse> getAllByDtos(){
+        return categoryService.getAllByDtos();
+    }
+
+    @GetMapping("/getAllByCharacter")
+    public List<GetListCategoryResponse> getByFirstCharacter(@RequestParam char character) {
+        return categoryService.getByFirstCharacter(character);
+    }
 
     @PostMapping("/add")
     public String add(@RequestBody AddCategoryRequest request){

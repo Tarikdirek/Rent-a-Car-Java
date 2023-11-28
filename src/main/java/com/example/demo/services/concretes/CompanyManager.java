@@ -7,8 +7,10 @@ import com.example.demo.entities.Company;
 import com.example.demo.services.dtos.company.requests.AddCompanyRequest;
 import com.example.demo.services.dtos.company.requests.DeleteCompanyRequest;
 import com.example.demo.services.dtos.company.requests.UpdateCompanyRequest;
+import com.example.demo.services.dtos.company.responses.GetListCompanyResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +41,10 @@ public class CompanyManager implements CompanyService {
         companyToUpdate.setCompanyName(request.getCompanyName());
         companyToUpdate.setTaxNum(request.getTaxNum());
         companyToUpdate.setWebAddress(request.getWebAddress());
-        companyToUpdate.setPhone(request.getPhone());
+        if (request.getPhone() != null) {
+            companyToUpdate.setPhone(request.getPhone());
+        }
+        companyToUpdate.setPhone(null);
         companyToUpdate.setPassword(request.getPassword());
         companyRepository.saveAndFlush(companyToUpdate);
     }
@@ -52,6 +57,15 @@ public class CompanyManager implements CompanyService {
         }
         companyRepository.delete(companyToDelete);
     }
+
+    public List<GetListCompanyResponse> findCompanyWhichPhoneNotNull() {
+        return companyRepository.findCompanyWhichPhoneNotNull();
+    }
+
+    public List<GetListCompanyResponse> getByCompanyNameWithUpperCase() {
+        return companyRepository.getByCompanyNameWithUpperCase();
+    }
+
 
     public List<Company> getALl() {
         var result = companyRepository.findAll();

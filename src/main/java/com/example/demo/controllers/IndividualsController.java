@@ -5,6 +5,7 @@ import com.example.demo.entities.Individual;
 import com.example.demo.services.dtos.individual.requests.AddIndividualRequest;
 import com.example.demo.services.dtos.individual.requests.DeleteIndividualRequest;
 import com.example.demo.services.dtos.individual.requests.UpdateIndividualRequest;
+import com.example.demo.services.dtos.individual.responses.GetListIndividualResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,16 @@ public class IndividualsController {
     public Individual getById(@PathVariable int id) {
         var result =individualService.getById(id);
         return result;
+    }
+
+    @GetMapping("/getIndividualByBirthDate")
+    public List<GetListIndividualResponse> getIndividualByBirthDate(int birthYear) {
+        return individualService.getIndividualByBirthDate(birthYear);
+    }
+
+    @GetMapping("/getIndividualByFirstNameDesc")
+    public List<GetListIndividualResponse> getIndividualByFirstNameDesc() {
+        return individualService.getIndividualByFirstNameDesc();
     }
 
 

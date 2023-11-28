@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class AddBrandRequest {
+
     private String name;
 }

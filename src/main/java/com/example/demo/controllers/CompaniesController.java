@@ -5,7 +5,9 @@ import com.example.demo.entities.Company;
 import com.example.demo.services.dtos.company.requests.AddCompanyRequest;
 import com.example.demo.services.dtos.company.requests.DeleteCompanyRequest;
 import com.example.demo.services.dtos.company.requests.UpdateCompanyRequest;
+import com.example.demo.services.dtos.company.responses.GetListCompanyResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.data.util.Streamable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +30,16 @@ public class CompaniesController {
     public Company getById(int id) {
         var result =companyService.getById(id);
         return result;
+    }
+
+    @GetMapping("getCompanyWhichPhoneNotNull")
+    public List<GetListCompanyResponse> findCompanyWhichPhoneNotNull() {
+        return companyService.findCompanyWhichPhoneNotNull();
+    }
+
+    @GetMapping("getByCompanyNameWithUpperCase")
+    public List<GetListCompanyResponse> getByCompanyNameWithUpperCase() {
+        return companyService.getByCompanyNameWithUpperCase();
     }
 
     @PostMapping("/add")

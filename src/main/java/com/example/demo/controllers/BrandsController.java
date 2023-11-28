@@ -5,6 +5,7 @@ import com.example.demo.entities.Brand;
 import com.example.demo.services.dtos.brand.requests.AddBrandRequest;
 import com.example.demo.services.dtos.brand.requests.DeleteBrandRequest;
 import com.example.demo.services.dtos.brand.requests.UpdateBranRequest;
+import com.example.demo.services.dtos.brand.responses.GetListBrandResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,23 @@ public class BrandsController {
         var result =brandService.getById(id);
         return result;
     }
+
+    @GetMapping("/getAllBrandByName")
+    public List<Brand> getBrandByName(@RequestParam String name) {
+        return brandService.getBrandByName(name);
+    }
+
+    @GetMapping("/getBrandByName")
+    public List<GetListBrandResponse> getBrandName(@RequestParam String name) {
+        return brandService.getBrandName(name);
+    }
+
+    @GetMapping("/getBrandByNameLength")
+    public List<GetListBrandResponse> getBrandNameLength(@RequestParam int nameLength) {
+        return brandService.getBrandByNameLength(nameLength);
+    }
+
+
 
 
     @PostMapping("/add")
