@@ -31,13 +31,13 @@ public class BrandsController {
         return result;
     }
 
-    @GetMapping("/getAllBrandByName")
-    public List<Brand> getBrandByName(@RequestParam String name) {
+    @GetMapping("/getBrandByNameStartingWith")
+    public List<Brand> getBrandByNameStartingWith(@RequestParam String name) {
         return brandService.getBrandByName(name);
     }
 
-    @GetMapping("/getBrandByName")
-    public List<GetListBrandResponse> getBrandName(@RequestParam String name) {
+    @GetMapping("/getBrandDtoName")
+    public List<GetListBrandResponse> getBrandDtoName(@RequestParam String name) {
         return brandService.getBrandName(name);
     }
 
