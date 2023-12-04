@@ -6,9 +6,11 @@ import com.example.demo.services.dtos.individual.requests.AddIndividualRequest;
 import com.example.demo.services.dtos.individual.requests.DeleteIndividualRequest;
 import com.example.demo.services.dtos.individual.requests.UpdateIndividualRequest;
 import com.example.demo.services.dtos.individual.responses.GetListIndividualResponse;
+import com.example.demo.services.dtos.individual.responses.GetListIndividualResponseWithId;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 
@@ -23,19 +25,19 @@ public class IndividualsController {
 
 
     @GetMapping("/getAll")
-    public List<Individual> getAll(){
-        var result = individualService.getALl();
-        return result;
+    public List<GetListIndividualResponseWithId> getAll(){
+        return  individualService.getALl();
+
     }
 
     @GetMapping("/getById/{id}")
-    public Individual getById(@PathVariable int id) {
-        var result =individualService.getById(id);
-        return result;
+    public GetListIndividualResponseWithId getById(@PathVariable int id) {
+        return  individualService.getById(id);
+
     }
 
     @GetMapping("/getIndividualByBirthDate")
-    public List<GetListIndividualResponse> getIndividualByBirthDate(int birthYear) {
+    public List<GetListIndividualResponse> getIndividualByBirthDate(@RequestParam int birthYear) {
         return individualService.getIndividualByBirthDate(birthYear);
     }
 

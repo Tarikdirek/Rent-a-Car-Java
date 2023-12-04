@@ -1,13 +1,12 @@
 package com.example.demo.controllers;
 
 import com.example.demo.services.abstracts.CompanyService;
-import com.example.demo.entities.Company;
 import com.example.demo.services.dtos.company.requests.AddCompanyRequest;
 import com.example.demo.services.dtos.company.requests.DeleteCompanyRequest;
 import com.example.demo.services.dtos.company.requests.UpdateCompanyRequest;
 import com.example.demo.services.dtos.company.responses.GetListCompanyResponse;
+import com.example.demo.services.dtos.company.responses.GetListCompanyResponseWithId;
 import lombok.AllArgsConstructor;
-import org.springframework.data.util.Streamable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,15 +20,15 @@ public class CompaniesController {
     public final CompanyService companyService;
 
     @GetMapping("getAll")
-    public List<Company> getALl() {
-        var result = companyService.getALl();
-        return result;
+    public List<GetListCompanyResponseWithId> getALl() {
+        return  companyService.getALl();
+
     }
 
     @GetMapping("/getById/{id}")
-    public Company getById(int id) {
-        var result =companyService.getById(id);
-        return result;
+    public GetListCompanyResponseWithId getById(@PathVariable int id) {
+        return companyService.getById(id);
+
     }
 
     @GetMapping("getCompanyWhichPhoneNotNull")

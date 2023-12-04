@@ -5,6 +5,7 @@ import com.example.demo.services.dtos.color.requests.AddColorRequest;
 import com.example.demo.services.dtos.color.requests.DeleteColorRequest;
 import com.example.demo.services.dtos.color.requests.UpdateColorRequest;
 import com.example.demo.services.dtos.color.responses.GetListColorResponse;
+import com.example.demo.services.dtos.color.responses.GetListColorResponseWithId;
 
 import java.util.List;
 
@@ -13,9 +14,9 @@ public interface ColorService {
     void update(UpdateColorRequest request);
     void delete(DeleteColorRequest request);
 
-    Color findColorByName(String name);
+    GetListColorResponseWithId findColorByName(String name);
     List<GetListColorResponse> getColorByOrder();
 
-    List<Color> getALl();
-    Color getById(int id);
+    List<GetListColorResponseWithId> getALl();
+    GetListColorResponseWithId getById(int id);
 }

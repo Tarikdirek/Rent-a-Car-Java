@@ -7,6 +7,7 @@ import com.example.demo.services.dtos.category.requests.AddCategoryRequest;
 import com.example.demo.services.dtos.category.requests.DeleteCategoryRequest;
 import com.example.demo.services.dtos.category.requests.UpdateCategoryRequest;
 import com.example.demo.services.dtos.category.responses.GetListCategoryResponse;
+import com.example.demo.services.dtos.category.responses.GetListResponseWithId;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,20 +40,29 @@ public class CategoryManager implements CategoryService {
     }
 
     public List<GetListCategoryResponse> getAllByDtos(){
-        return categoryRepository.findAllByDtos();
+
+        return categoryRepository.findAll().stream()
+                .map((category -> new GetListCategoryResponse(category.getCategoryName())))
+                .toList();
+
     }
 
-    public List<GetListCategoryResponse> getByFirstCharacter(char character) {
-        return categoryRepository.findByFirstCharacter(character);
+    public List<GetListCategoryResponse> getByCategoryName(String name) {
+        return categoryRepository.findByCategoryNameStartingWith(name).stream()
+                .map((categoryName -> new GetListCategoryResponse(categoryName.getCategoryName()))).toList();
     }
 
-    public List<Category> getALl() {
-        var result = categoryRepository.findAll();
-        return result;
+    public List<GetListResponseWithId> getALl() {
+        return   categoryRepository.findAll().stream()
+                .map(category -> new GetListResponseWithId(category.getId(), category.getCategoryName())).toList();
+
     }
 
-    public Category getById(int id) {
-        var result = categoryRepository.findById(id).orElseThrow();
-        return result;
+    public GetListResponseWithId getById(int id) {
+
+        return categoryRepository.findById(id)
+                .map((category) -> new GetListResponseWithId(category.getId(), category.getCategoryName())).orElseThrow();
+
+
     }
 }

@@ -5,7 +5,9 @@ import com.example.demo.services.dtos.individual.requests.AddIndividualRequest;
 import com.example.demo.services.dtos.individual.requests.DeleteIndividualRequest;
 import com.example.demo.services.dtos.individual.requests.UpdateIndividualRequest;
 import com.example.demo.services.dtos.individual.responses.GetListIndividualResponse;
+import com.example.demo.services.dtos.individual.responses.GetListIndividualResponseWithId;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IndividualService {
@@ -17,7 +19,7 @@ public interface IndividualService {
     List<GetListIndividualResponse> getIndividualByBirthDate(int birthYear);
     List<GetListIndividualResponse> getIndividualByFirstNameDesc();
 
-    List<Individual> getALl();
-    Individual getById(int id);
+    List<GetListIndividualResponseWithId> getALl();
+    GetListIndividualResponseWithId getById(int id);
 
 }

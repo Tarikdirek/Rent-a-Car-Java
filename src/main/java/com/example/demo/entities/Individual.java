@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
+
 @Entity
 @Table(name="individuals")
 @Data
@@ -29,6 +32,6 @@ public class Individual extends User {
     private String nationalId;
 
     @Column(name = "birth_date")
-    private int birthDate;
+    private Date birthDate;
 
 }

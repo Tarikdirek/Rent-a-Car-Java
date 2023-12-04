@@ -6,6 +6,7 @@ import com.example.demo.services.dtos.brand.requests.AddBrandRequest;
 import com.example.demo.services.dtos.brand.requests.DeleteBrandRequest;
 import com.example.demo.services.dtos.brand.requests.UpdateBranRequest;
 import com.example.demo.services.dtos.brand.responses.GetListBrandResponse;
+import com.example.demo.services.dtos.brand.responses.GetListBrandResponseWithId;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class BrandsController {
     }
 
     @GetMapping("/getBrandByNameStartingWith")
-    public List<Brand> getBrandByNameStartingWith(@RequestParam String name) {
+    public List<GetListBrandResponseWithId> getBrandByNameStartingWith(@RequestParam String name) {
         return brandService.getBrandByName(name);
     }
 
@@ -42,7 +43,7 @@ public class BrandsController {
     }
 
     @GetMapping("/getBrandByNameLength")
-    public List<GetListBrandResponse> getBrandNameLength(@RequestParam int nameLength) {
+    public List<GetListBrandResponseWithId> getBrandNameLength(@RequestParam int nameLength) {
         return brandService.getBrandByNameLength(nameLength);
     }
 

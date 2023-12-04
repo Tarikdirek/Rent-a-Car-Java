@@ -8,12 +8,15 @@ import com.example.demo.services.dtos.company.requests.AddCompanyRequest;
 import com.example.demo.services.dtos.company.requests.DeleteCompanyRequest;
 import com.example.demo.services.dtos.company.requests.UpdateCompanyRequest;
 import com.example.demo.services.dtos.company.responses.GetListCompanyResponse;
+import com.example.demo.services.dtos.company.responses.GetListCompanyResponseWithId;
+import com.example.demo.services.dtos.individual.responses.GetListIndividualResponseWithId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -43,8 +46,9 @@ public class CompanyManager implements CompanyService {
         companyToUpdate.setWebAddress(request.getWebAddress());
         if (request.getPhone() != null) {
             companyToUpdate.setPhone(request.getPhone());
+        }else {
+            companyToUpdate.setPhone(null);
         }
-        companyToUpdate.setPhone(null);
         companyToUpdate.setPassword(request.getPassword());
         companyRepository.saveAndFlush(companyToUpdate);
     }
@@ -59,22 +63,32 @@ public class CompanyManager implements CompanyService {
     }
 
     public List<GetListCompanyResponse> findCompanyWhichPhoneNotNull() {
-        return companyRepository.findCompanyWhichPhoneNotNull();
+        return companyRepository.findAll().stream().filter(company -> company.getPhone()!=null).map(company ->
+                new GetListCompanyResponse(company.getCompanyName(),company.getWebAddress()
+                ,company.getPhone(),company.getTaxNum())).toList();
     }
 
     public List<GetListCompanyResponse> getByCompanyNameWithUpperCase() {
-        return companyRepository.getByCompanyNameWithUpperCase();
+        return companyRepository.findAll().stream().map(company ->
+                new GetListCompanyResponse(company.getCompanyName().toUpperCase(),company.getWebAddress()
+                        ,company.getPhone(),company.getTaxNum())).toList();
     }
 
 
-    public List<Company> getALl() {
-        var result = companyRepository.findAll();
-        return result;
+    public List<GetListCompanyResponseWithId> getALl() {
+        return  companyRepository.findAll().stream().map(company -> new GetListCompanyResponseWithId(
+                company.getId(),company.getEmail(),company.getPassword(),company.getCompanyName(),company.getWebAddress()
+                ,company.getPhone(),company.getTaxNum()
+        )).toList();
+
     }
 
-    public Company getById(int id) {
-        var result = companyRepository.findById(id).orElseThrow();
-        return result;
+    public GetListCompanyResponseWithId getById(int id) {
+        return companyRepository.findAll().stream().filter(company -> company.getId()==id).map(company -> new GetListCompanyResponseWithId(
+                company.getId(),company.getEmail(),company.getPassword(),company.getCompanyName(),company.getWebAddress()
+                ,company.getPhone(),company.getTaxNum()
+        )).findAny().orElseThrow();
+
     }
 
 

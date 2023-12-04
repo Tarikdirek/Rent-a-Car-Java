@@ -6,6 +6,7 @@ import com.example.demo.services.dtos.category.requests.AddCategoryRequest;
 import com.example.demo.services.dtos.category.requests.DeleteCategoryRequest;
 import com.example.demo.services.dtos.category.requests.UpdateCategoryRequest;
 import com.example.demo.services.dtos.category.responses.GetListCategoryResponse;
+import com.example.demo.services.dtos.category.responses.GetListResponseWithId;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +21,14 @@ public class CategoriesController {
     private final CategoryService categoryService;
 
     @GetMapping("/getAll")
-    public List<Category> getAll(){
-        var result = categoryService.getALl();
-        return result;
+    public List<GetListResponseWithId> getAll(){
+
+        return categoryService.getALl();
     }
 
     @GetMapping("/getById/{id}")
-    public Category getById(@PathVariable int id) {
-        var result =categoryService.getById(id);
-        return result;
+    public GetListResponseWithId getById(@PathVariable int id) {
+        return categoryService.getById(id);
     }
 
     @GetMapping("/getAllByDtos")
@@ -36,9 +36,9 @@ public class CategoriesController {
         return categoryService.getAllByDtos();
     }
 
-    @GetMapping("/getAllByCharacter")
-    public List<GetListCategoryResponse> getByFirstCharacter(@RequestParam char character) {
-        return categoryService.getByFirstCharacter(character);
+    @GetMapping("/getAllByName")
+    public List<GetListCategoryResponse> getAllByName(@RequestParam String name) {
+        return categoryService.getByCategoryName(name);
     }
 
     @PostMapping("/add")

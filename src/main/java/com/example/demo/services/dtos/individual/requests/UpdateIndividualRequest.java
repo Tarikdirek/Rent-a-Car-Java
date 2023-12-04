@@ -2,6 +2,8 @@ package com.example.demo.services.dtos.individual.requests;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class UpdateIndividualRequest {
     private int id;
@@ -10,5 +12,5 @@ public class UpdateIndividualRequest {
     private String firstName;
     private String lastName;
     private String nationalId;
-    private int birthDate;
+    private Date birthDate;
 }

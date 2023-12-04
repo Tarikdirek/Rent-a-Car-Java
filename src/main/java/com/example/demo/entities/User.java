@@ -21,14 +21,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private int id;
+
     @Column(name="email")
     private String email;
+
     @Column(name = "password")
     private String password;
-
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<Car> cars;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore

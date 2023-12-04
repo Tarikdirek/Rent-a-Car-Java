@@ -3,10 +3,12 @@ package com.example.demo.services.concretes;
 import com.example.demo.services.abstracts.ColorService;
 import com.example.demo.entities.Color;
 import com.example.demo.repositories.ColorRepository;
+import com.example.demo.services.dtos.brand.responses.GetListBrandResponseWithId;
 import com.example.demo.services.dtos.color.requests.AddColorRequest;
 import com.example.demo.services.dtos.color.requests.DeleteColorRequest;
 import com.example.demo.services.dtos.color.requests.UpdateColorRequest;
 import com.example.demo.services.dtos.color.responses.GetListColorResponse;
+import com.example.demo.services.dtos.color.responses.GetListColorResponseWithId;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,21 +39,26 @@ public class ColorManager implements ColorService {
         colorRepository.delete(colorToUpdate);
     }
 
-    public Color findColorByName(String name) {
-        return colorRepository.findColorByName(name);
+    public GetListColorResponseWithId findColorByName(String name) {
+        return colorRepository.findAll().stream()
+                .filter(color -> color.getName().equals(name))
+                .map(color -> new GetListColorResponseWithId(color.getId(),color.getName())).findAny().orElseThrow();
     }
 
     public List<GetListColorResponse> getColorByOrder() {
         return colorRepository.getColorByOrder();
     }
 
-    public List<Color> getALl() {
-        var result = colorRepository.findAll();
-        return result;
+    public List<GetListColorResponseWithId> getALl() {
+        return  colorRepository.findAll().stream()
+                .map(color -> new GetListColorResponseWithId(color.getId(), color.getName())).toList();
+
     }
 
-    public Color getById(int id) {
-        var result = colorRepository.findById(id).orElseThrow();
-        return result;
+    public GetListColorResponseWithId getById(int id) {
+        return colorRepository.findAll().stream().filter(color -> color.getId()==id)
+                .map(color -> new GetListColorResponseWithId(color.getId(),color.getName()))
+                .findAny().orElseThrow();
+
     }
 }

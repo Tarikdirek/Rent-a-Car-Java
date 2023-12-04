@@ -6,6 +6,7 @@ import com.example.demo.services.dtos.color.requests.AddColorRequest;
 import com.example.demo.services.dtos.color.requests.DeleteColorRequest;
 import com.example.demo.services.dtos.color.requests.UpdateColorRequest;
 import com.example.demo.services.dtos.color.responses.GetListColorResponse;
+import com.example.demo.services.dtos.color.responses.GetListColorResponseWithId;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,19 +21,19 @@ public class ColorsController {
     public ColorService colorService;
 
     @GetMapping("/getAll")
-    public List<Color> getAll(){
-        var result = colorService.getALl();
-        return result;
+    public List<GetListColorResponseWithId> getAll(){
+        return colorService.getALl();
+
     }
 
-    @GetMapping("/getById")
-    public Color getById(@PathVariable int id) {
-        var result =colorService.getById(id);
-        return result;
+    @GetMapping("/getById/{id}")
+    public GetListColorResponseWithId getById(@PathVariable int id) {
+        return  colorService.getById(id);
+
     }
 
     @GetMapping("/getByColorName")
-    public Color findColorByName(String name) {
+    public GetListColorResponseWithId findColorByName(String name) {
         return colorService.findColorByName(name);
     }
     @GetMapping("/getColorsByOrder")

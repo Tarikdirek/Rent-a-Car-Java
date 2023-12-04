@@ -5,6 +5,7 @@ import com.example.demo.services.dtos.company.requests.AddCompanyRequest;
 import com.example.demo.services.dtos.company.requests.DeleteCompanyRequest;
 import com.example.demo.services.dtos.company.requests.UpdateCompanyRequest;
 import com.example.demo.services.dtos.company.responses.GetListCompanyResponse;
+import com.example.demo.services.dtos.company.responses.GetListCompanyResponseWithId;
 import org.springframework.data.util.Streamable;
 
 import java.util.List;
@@ -18,6 +19,6 @@ public interface CompanyService {
     List<GetListCompanyResponse> findCompanyWhichPhoneNotNull();
     List<GetListCompanyResponse> getByCompanyNameWithUpperCase();
 
-    List<Company> getALl();
-    Company getById(int id);
+    List<GetListCompanyResponseWithId> getALl();
+    GetListCompanyResponseWithId getById(int id);
 }
