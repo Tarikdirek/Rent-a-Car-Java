@@ -14,8 +14,8 @@ public interface BrandRepository extends JpaRepository<Brand,Integer> {
             "from Brand b where b.name = :name")
     List<GetListBrandResponse>  findByName(String name);
 
-    @Query("SELECT new com.example.demo.services.dtos.brand.responses.GetListBrandResponse(b.name) " +
+   /* @Query("SELECT new com.example.demo.services.dtos.brand.responses.GetListBrandResponse(b.name) " +
             "from Brand b where length(b.name)  > :nameLength ")
-    List<GetListBrandResponse>  findByNameLength(int nameLength);
+    List<GetListBrandResponse>  findByNameLength(int nameLength);*/
 
 }

@@ -24,8 +24,9 @@ public class CarImage {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name="car_id")
-    private int carId;
+    @ManyToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 
 
 }

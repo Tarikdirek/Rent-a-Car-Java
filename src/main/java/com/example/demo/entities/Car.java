@@ -1,9 +1,12 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -37,13 +40,14 @@ public class Car {
     @JoinColumn(name = "color_id")
     private Color color;
 
-    @ManyToOne()
-    @JoinColumn(name ="user_id")
-    private User user;
 
     @ManyToOne()
     @JoinColumn(name ="category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "car")
+    @JsonIgnore
+    List<CarImage> carImageList;
 
 
 

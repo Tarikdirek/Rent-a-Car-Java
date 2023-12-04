@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ColorRepository extends JpaRepository<Color,Integer> {
 
-    Color findColorByName(String name);
+    /* Color findColorByName(String name);*/
 
 
     @Query("select new com.example.demo.services.dtos.color.responses.GetListColorResponse(c.name) from Color c " +

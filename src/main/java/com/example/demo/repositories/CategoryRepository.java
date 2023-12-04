@@ -9,12 +9,12 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category,Integer> {
 
-    @Query("select new com.example.demo.services.dtos.category.responses.GetListCategoryResponse(c.categoryName) " +
+    /* @Query("select new com.example.demo.services.dtos.category.responses.GetListCategoryResponse(c.categoryName) " +
             "from Category c")
-    List<GetListCategoryResponse> findAllByDtos();
+    List<GetListCategoryResponse> findAllByDtos();*/
 
 
-    @Query("select new com.example.demo.services.dtos.category.responses.GetListCategoryResponse(c.categoryName) " +
-            "from Category c where c.categoryName like concat(:c,'%') ")
-    List<GetListCategoryResponse> findByFirstCharacter(char c);
+    /* @Query("select new com.example.demo.services.dtos.category.responses.GetListCategoryResponse(c.categoryName) " +
+            "from Category c where c.categoryName like concat(:c,'%') ")*/
+    List<Category> findByCategoryNameStartingWith(String name);
 }
