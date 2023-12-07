@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 
 @Data
@@ -23,12 +23,16 @@ public class Rental {
 
 
     @Column(name="rent_date")
-    private Date rentDate;
+    private LocalDate rentDate;
 
     @Column(name="return_date")
-    private Date returnDate;
+    private LocalDate returnDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name="car_id")
+    private Car car;
 }

@@ -28,6 +28,10 @@ public class CompanyManager implements CompanyService {
 
     public void add(AddCompanyRequest request)
     {
+        if (companyRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Email is currently in use");
+        }
+
         Company company = new Company();
         company.setEmail(request.getEmail());
         company.setPassword(request.getPassword());
@@ -39,7 +43,8 @@ public class CompanyManager implements CompanyService {
     }
 
     public void update(UpdateCompanyRequest request) {
-        Company companyToUpdate = companyRepository.findById(request.getId()).orElseThrow();
+        Company companyToUpdate = companyRepository.findById(request.getId())
+                .orElseThrow(()-> new RuntimeException("User not found"));
         companyToUpdate.setEmail(request.getEmail());
         companyToUpdate.setCompanyName(request.getCompanyName());
         companyToUpdate.setTaxNum(request.getTaxNum());
@@ -57,7 +62,7 @@ public class CompanyManager implements CompanyService {
         Company companyToDelete = companyRepository.findById(request.getId()).orElseThrow();
         boolean checkPassword =(request.getPassword().equals(companyToDelete.getPassword()));
         if (!checkPassword) {
-            throw new RuntimeException();
+            throw new RuntimeException("Password is invalid");
         }
         companyRepository.delete(companyToDelete);
     }

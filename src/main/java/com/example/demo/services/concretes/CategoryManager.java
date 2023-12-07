@@ -7,7 +7,7 @@ import com.example.demo.services.dtos.category.requests.AddCategoryRequest;
 import com.example.demo.services.dtos.category.requests.DeleteCategoryRequest;
 import com.example.demo.services.dtos.category.requests.UpdateCategoryRequest;
 import com.example.demo.services.dtos.category.responses.GetListCategoryResponse;
-import com.example.demo.services.dtos.category.responses.GetListResponseWithId;
+import com.example.demo.services.dtos.category.responses.GetListCategoryResponseWithId;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +22,10 @@ public class CategoryManager implements CategoryService {
 
     public void add(AddCategoryRequest request) {
 
+        if (categoryRepository.existsByCategoryName(request.getName()))
+        {
+            throw  new RuntimeException("Category already exist");
+        }
         Category category = new Category();
         category.setCategoryName(request.getName());
         categoryRepository.save(category);
@@ -29,6 +33,11 @@ public class CategoryManager implements CategoryService {
     }
 
     public void update(UpdateCategoryRequest request) {
+
+        if (!categoryRepository.existsByCategoryName(request.getName()))
+        {
+            throw  new RuntimeException("Category does not exist");
+        }
         Category categoryToUpdate = categoryRepository.findById(request.getId()).orElseThrow();
         categoryToUpdate.setCategoryName(request.getName());
         categoryRepository.saveAndFlush(categoryToUpdate);
@@ -52,16 +61,16 @@ public class CategoryManager implements CategoryService {
                 .map((categoryName -> new GetListCategoryResponse(categoryName.getCategoryName()))).toList();
     }
 
-    public List<GetListResponseWithId> getALl() {
+    public List<GetListCategoryResponseWithId> getALl() {
         return   categoryRepository.findAll().stream()
-                .map(category -> new GetListResponseWithId(category.getId(), category.getCategoryName())).toList();
+                .map(category -> new GetListCategoryResponseWithId(category.getId(), category.getCategoryName())).toList();
 
     }
 
-    public GetListResponseWithId getById(int id) {
+    public Category getById(int id) {
 
-        return categoryRepository.findById(id)
-                .map((category) -> new GetListResponseWithId(category.getId(), category.getCategoryName())).orElseThrow();
+        return categoryRepository.findById(id).orElseThrow();
+
 
 
     }

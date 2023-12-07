@@ -8,7 +8,6 @@ import com.example.demo.services.dtos.brand.requests.DeleteBrandRequest;
 import com.example.demo.services.dtos.brand.requests.UpdateBranRequest;
 import com.example.demo.services.dtos.brand.responses.GetListBrandResponse;
 import com.example.demo.services.dtos.brand.responses.GetListBrandResponseWithId;
-import com.example.demo.services.dtos.category.responses.GetListResponseWithId;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +22,21 @@ public class BrandManager implements BrandService {
 
     public void add(AddBrandRequest request) {
 
+        if (brandRepository.existsBrandByName(request.getName())){
+            throw new RuntimeException("Brand already exist");
+        }
+
         Brand brand = new Brand();
         brand.setName(request.getName());
         brandRepository.save(brand);
     }
 
     public void update(UpdateBranRequest request) {
+
+        if (!(brandRepository.existsBrandByName(request.getName()))){
+            throw new RuntimeException("Brand not exist");
+        }
+
         Brand brandToUpdate = brandRepository.findById(request.getId()).orElseThrow();
         brandToUpdate.setName(request.getName());
         brandRepository.saveAndFlush(brandToUpdate);
@@ -56,13 +64,13 @@ public class BrandManager implements BrandService {
     }
 
 
-    public List<Brand> getALl() {
-        var result = brandRepository.findAll();
-        return result;
+    public List<GetListBrandResponseWithId> getALl() {
+        return brandRepository.findAll().stream()
+                .map(brand -> new GetListBrandResponseWithId(brand.getId(), brand.getName())).toList();
+
     }
 
     public Brand getById(int id) {
-        var result = brandRepository.findById(id).orElseThrow();
-        return result;
+        return brandRepository.findById(id).orElseThrow();
     }
 }

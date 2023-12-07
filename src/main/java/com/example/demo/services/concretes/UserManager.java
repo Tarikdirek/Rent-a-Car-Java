@@ -37,8 +37,8 @@ public class UserManager implements UserService {
     }
 
     public User getById(int id) {
-        var result = userRepository.findById(id).orElseThrow();
-        return result;
+        return  userRepository.findById(id).orElseThrow();
+
     }
 
 

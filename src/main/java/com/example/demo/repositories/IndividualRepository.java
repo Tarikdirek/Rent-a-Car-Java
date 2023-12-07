@@ -17,4 +17,7 @@ public interface IndividualRepository extends JpaRepository<Individual,Integer> 
     /* @Query("select new com.example.demo.services.dtos.individual.responses.GetListIndividualResponse(i.firstName,i.lastName,i.nationalId,i.email,i.password,i.birthDate) " +
             "from Individual i order by i.firstName desc ")
     List<GetListIndividualResponse> getIndividualByFirstNameDesc(); */
+
+    boolean existsByNationalId(String id);
+    boolean existsByEmail(String email);
 }

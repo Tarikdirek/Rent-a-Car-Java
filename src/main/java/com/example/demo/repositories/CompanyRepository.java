@@ -19,4 +19,6 @@ public interface CompanyRepository extends JpaRepository<Company,Integer> {
             "from Company c where c.phone is not null ")
     List<GetListCompanyResponse> findCompanyWhichPhoneNotNull(); */
 
+    boolean existsByEmail(String email);
+
 }

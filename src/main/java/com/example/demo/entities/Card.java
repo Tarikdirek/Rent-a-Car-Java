@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,16 +19,20 @@ public class Card {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "card_number")
-    private String cardNumber;
-
     @Column(name = "valid_date")
     private int validDate;
 
     @Column(name="cvv_num")
     private int cvvNum;
 
+    @Column(name = "owner_full_name")
+    private String cardNumber;
+
+    @Column(name = "card_number")
+    private String ownerFullName;
+
     @OneToMany(mappedBy = "card")
+    @JsonIgnore
     private List<Payment> payments;
 
 }

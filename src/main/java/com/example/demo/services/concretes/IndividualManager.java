@@ -30,6 +30,10 @@ public class IndividualManager implements IndividualService {
 
     public void add(AddIndividualRequest request) {
 
+        if (individualRepository.existsByNationalId(request.getNationalId())) {
+            throw new RuntimeException("National id is already in use");
+        }
+
         Individual individual = new Individual();
         individual.setEmail(request.getEmail());
         individual.setPassword(request.getPassword());
@@ -42,7 +46,11 @@ public class IndividualManager implements IndividualService {
     }
 
     public void update(UpdateIndividualRequest request) {
+        if (individualRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("User not found");
+        }
         Individual individualToUpdate = individualRepository.findById(request.getId()).orElseThrow();
+
         individualToUpdate.setEmail(request.getEmail());
         individualToUpdate.setPassword(request.getPassword());
         individualToUpdate.setFirstName(request.getFirstName());
@@ -79,10 +87,8 @@ public class IndividualManager implements IndividualService {
 
     }
 
-    public GetListIndividualResponseWithId getById(int id) {
-        return  individualRepository.findAll().stream().filter(individual -> individual.getId() == id).map(individual -> new GetListIndividualResponseWithId(individual.getId(),
-                individual.getFirstName(),individual.getLastName(),individual.getNationalId(),individual.getEmail(),
-                individual.getPassword(),individual.getBirthDate())).findAny().orElseThrow();
+    public Individual getById(int id) {
+        return  individualRepository.findById(id).orElseThrow();
 
     }
 

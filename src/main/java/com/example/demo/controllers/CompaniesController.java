@@ -6,6 +6,7 @@ import com.example.demo.services.dtos.company.requests.DeleteCompanyRequest;
 import com.example.demo.services.dtos.company.requests.UpdateCompanyRequest;
 import com.example.demo.services.dtos.company.responses.GetListCompanyResponse;
 import com.example.demo.services.dtos.company.responses.GetListCompanyResponseWithId;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,20 +43,20 @@ public class CompaniesController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestBody AddCompanyRequest request){
+    public String add(@RequestBody @Valid AddCompanyRequest request){
 
         companyService.add(request);
         return "Company added";
     }
 
     @DeleteMapping("/delete")
-    public String delete(@RequestBody DeleteCompanyRequest request){
+    public String delete(@RequestBody @Valid DeleteCompanyRequest request){
         companyService.delete(request);
         return "Company deleted";
     }
 
     @PutMapping("/update")
-    public String update(@RequestBody UpdateCompanyRequest request){
+    public String update(@RequestBody @Valid UpdateCompanyRequest request){
         companyService.update(request);
         return "Company updated";
     }

@@ -7,6 +7,7 @@ import com.example.demo.services.dtos.color.requests.DeleteColorRequest;
 import com.example.demo.services.dtos.color.requests.UpdateColorRequest;
 import com.example.demo.services.dtos.color.responses.GetListColorResponse;
 import com.example.demo.services.dtos.color.responses.GetListColorResponseWithId;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class ColorsController {
     }
 
     @GetMapping("/getById/{id}")
-    public GetListColorResponseWithId getById(@PathVariable int id) {
+    public Color getById(@PathVariable int id) {
         return  colorService.getById(id);
 
     }
@@ -43,7 +44,7 @@ public class ColorsController {
 
 
     @PostMapping("/add")
-    public String add(@RequestBody AddColorRequest request){
+    public String add(@RequestBody @Valid AddColorRequest request){
 
         colorService.add(request);
 
@@ -51,13 +52,13 @@ public class ColorsController {
     }
 
     @DeleteMapping("/delete")
-    public String delete(@RequestBody DeleteColorRequest request){
+    public String delete(@RequestBody @Valid DeleteColorRequest request){
         colorService.delete(request);
         return "Color deleted";
     }
 
     @PutMapping("/update")
-    public String update(@RequestBody UpdateColorRequest request){
+    public String update(@RequestBody @Valid UpdateColorRequest request){
         colorService.update(request);
         return "Color updated";
     }

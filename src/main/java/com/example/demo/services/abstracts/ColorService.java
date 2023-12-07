@@ -18,5 +18,5 @@ public interface ColorService {
     List<GetListColorResponse> getColorByOrder();
 
     List<GetListColorResponseWithId> getALl();
-    GetListColorResponseWithId getById(int id);
+    Color getById(int id);
 }

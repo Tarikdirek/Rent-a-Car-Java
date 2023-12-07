@@ -18,4 +18,7 @@ public interface BrandRepository extends JpaRepository<Brand,Integer> {
             "from Brand b where length(b.name)  > :nameLength ")
     List<GetListBrandResponse>  findByNameLength(int nameLength);*/
 
+    boolean existsBrandByName(String brand);
+    Brand findByName(Brand brand);
+
 }

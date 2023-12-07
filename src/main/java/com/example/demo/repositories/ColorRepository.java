@@ -16,5 +16,6 @@ public interface ColorRepository extends JpaRepository<Color,Integer> {
             "order by c.name ")
     List<GetListColorResponse> getColorByOrder();
 
+    boolean existsColorByName(String name);
 
 }

@@ -7,6 +7,7 @@ import com.example.demo.services.dtos.individual.requests.DeleteIndividualReques
 import com.example.demo.services.dtos.individual.requests.UpdateIndividualRequest;
 import com.example.demo.services.dtos.individual.responses.GetListIndividualResponse;
 import com.example.demo.services.dtos.individual.responses.GetListIndividualResponseWithId;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class IndividualsController {
     }
 
     @GetMapping("/getById/{id}")
-    public GetListIndividualResponseWithId getById(@PathVariable int id) {
+    public Individual getById(@PathVariable int id) {
         return  individualService.getById(id);
 
     }
@@ -48,7 +49,7 @@ public class IndividualsController {
 
 
     @PostMapping("/add")
-    public String add(@RequestBody AddIndividualRequest request){
+    public String add(@RequestBody @Valid AddIndividualRequest request){
 
         individualService.add(request);
 
@@ -56,13 +57,13 @@ public class IndividualsController {
     }
 
     @DeleteMapping("/delete")
-    public String delete(@RequestBody DeleteIndividualRequest request){
+    public String delete(@RequestBody @Valid DeleteIndividualRequest request){
         individualService.delete(request);
         return "User deleted";
     }
 
     @PutMapping("/update")
-    public String update(@RequestBody UpdateIndividualRequest request){
+    public String update(@RequestBody @Valid UpdateIndividualRequest request){
         individualService.update(request);
         return "User updated";
     }

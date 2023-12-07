@@ -20,6 +20,6 @@ public interface IndividualService {
     List<GetListIndividualResponse> getIndividualByFirstNameDesc();
 
     List<GetListIndividualResponseWithId> getALl();
-    GetListIndividualResponseWithId getById(int id);
+    Individual getById(int id);
 
 }

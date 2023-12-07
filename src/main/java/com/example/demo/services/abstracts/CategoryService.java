@@ -5,7 +5,7 @@ import com.example.demo.services.dtos.category.requests.AddCategoryRequest;
 import com.example.demo.services.dtos.category.requests.DeleteCategoryRequest;
 import com.example.demo.services.dtos.category.requests.UpdateCategoryRequest;
 import com.example.demo.services.dtos.category.responses.GetListCategoryResponse;
-import com.example.demo.services.dtos.category.responses.GetListResponseWithId;
+import com.example.demo.services.dtos.category.responses.GetListCategoryResponseWithId;
 
 import java.util.List;
 
@@ -16,6 +16,6 @@ public interface CategoryService {
     List<GetListCategoryResponse> getAllByDtos();
     List<GetListCategoryResponse> getByCategoryName(String name);
 
-    List<GetListResponseWithId> getALl();
-    GetListResponseWithId getById(int id);
+    List<GetListCategoryResponseWithId> getALl();
+    Category getById(int id);
 }

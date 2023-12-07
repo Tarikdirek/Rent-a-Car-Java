@@ -7,6 +7,7 @@ import com.example.demo.services.dtos.brand.requests.DeleteBrandRequest;
 import com.example.demo.services.dtos.brand.requests.UpdateBranRequest;
 import com.example.demo.services.dtos.brand.responses.GetListBrandResponse;
 import com.example.demo.services.dtos.brand.responses.GetListBrandResponseWithId;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,15 +22,15 @@ public class BrandsController {
     public final BrandService brandService;
 
     @GetMapping("/getAll")
-    public List<Brand> getAll(){
-        var result = brandService.getALl();
-        return result;
+    public List<GetListBrandResponseWithId> getAll(){
+        return brandService.getALl();
+
     }
 
     @GetMapping("/getById/{id}")
     public Brand getById(@PathVariable int id) {
-        var result =brandService.getById(id);
-        return result;
+        return  brandService.getById(id);
+
     }
 
     @GetMapping("/getBrandByNameStartingWith")
@@ -51,19 +52,19 @@ public class BrandsController {
 
 
     @PostMapping("/add")
-    public String add(@RequestBody AddBrandRequest request){
+    public String add(@RequestBody @Valid AddBrandRequest request){
         brandService.add(request);
         return "Brand added";
     }
 
     @DeleteMapping("/delete")
-    public String delete(@RequestBody DeleteBrandRequest request){
+    public String delete(@RequestBody @Valid DeleteBrandRequest request){
         brandService.delete(request);
         return "Brand deleted";
     }
 
     @PutMapping("/update")
-    public String update(@RequestBody UpdateBranRequest request){
+    public String update(@RequestBody @Valid UpdateBranRequest request){
         brandService.update(request);
         return "Brand updated";
     }

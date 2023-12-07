@@ -23,18 +23,28 @@ public class ColorManager implements ColorService {
 
     public void add(AddColorRequest request)
     {
+        if (colorRepository.existsColorByName(request.getName())) {
+            throw new RuntimeException("Color can not add multiple time");
+        }
+
         Color color = new Color();
         color.setName(request.getName());
         colorRepository.save(color);
     }
 
     public void update(UpdateColorRequest request) {
+
+        if (!colorRepository.existsColorByName(request.getName())) {
+            throw new RuntimeException("Color does not exist");
+        }
+
         Color colorToUpdate = colorRepository.findById(request.getId()).orElseThrow();
         colorToUpdate.setName(request.getName());
         colorRepository.saveAndFlush(colorToUpdate);
     }
 
     public void delete(DeleteColorRequest request) {
+
         Color colorToUpdate = colorRepository.findById(request.getId()).orElseThrow();
         colorRepository.delete(colorToUpdate);
     }
@@ -55,10 +65,8 @@ public class ColorManager implements ColorService {
 
     }
 
-    public GetListColorResponseWithId getById(int id) {
-        return colorRepository.findAll().stream().filter(color -> color.getId()==id)
-                .map(color -> new GetListColorResponseWithId(color.getId(),color.getName()))
-                .findAny().orElseThrow();
+    public Color getById(int id) {
+        return colorRepository.findById(id).orElseThrow();
 
     }
 }

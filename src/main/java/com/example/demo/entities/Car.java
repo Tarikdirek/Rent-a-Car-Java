@@ -30,7 +30,10 @@ public class Car {
     private String modelName;
 
     @Column(name = "status")
-    private boolean status;
+    private String status;
+
+    @Column(name = "plate")
+    private String plate;
 
     @ManyToOne()
     @JoinColumn(name = "brand_id")
@@ -49,6 +52,8 @@ public class Car {
     @JsonIgnore
     List<CarImage> carImageList;
 
-
+    @OneToMany(mappedBy="car")
+    @JsonIgnore
+    List<Rental> rentals;
 
 }
